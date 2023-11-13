@@ -94,6 +94,11 @@ def move(url):
         return redirect(url_for('wiki.display', url=newurl))
     return render_template('move.html', form=form, page=page)
 
+@bp.route('/download/<path:url>')
+@protect
+def download(url):
+    page = current_wiki.get_or_404(url)
+    return render_template('download.html', page=page)
 
 @bp.route('/delete/<path:url>/')
 @protect
