@@ -8,6 +8,7 @@ from flask import redirect
 from flask import render_template
 from flask import request
 from flask import url_for
+from flask import send_file
 from flask_login import current_user
 from flask_login import login_required
 from flask_login import login_user
@@ -22,6 +23,7 @@ from wiki.web import current_wiki
 from wiki.web import current_users
 from wiki.web.user import protect
 
+import io
 
 bp = Blueprint('wiki', __name__)
 
@@ -94,10 +96,17 @@ def move(url):
         return redirect(url_for('wiki.display', url=newurl))
     return render_template('move.html', form=form, page=page)
 
-@bp.route('/download/<path:url>')
+@bp.route('/download/<path:url>', methods=['GET', 'POST'])
 @protect
 def download(url):
     page = current_wiki.get_or_404(url)
+    if request.method == 'POST':
+        # send a text file back to the user
+        text_file = page.title + "\n\n" + page.body + "\n\nTags:\n" + page.tags
+        return send_file(
+            io.BytesIO(text_file.encode('utf-8')),
+            as_attachment=True,
+            download_name=page.title + '.txt')
     return render_template('download.html', page=page)
 
 @bp.route('/delete/<path:url>/')
