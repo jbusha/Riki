@@ -8,5 +8,7 @@
 	{{ form.name(placeholder='Username') }}
 	{{ form.password(placeholder='Password') }}
 	<input type="submit" class="btn btn-primary" value="Login">
+<p>Don't have a profile? <a href="{{ url_for('wiki.signup') }}">Create one here!</a></p>
 </form>
+
 {% endblock content %}

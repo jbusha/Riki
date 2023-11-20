@@ -8,8 +8,10 @@ from wtforms import BooleanField
 from wtforms import StringField
 from wtforms import TextAreaField
 from wtforms import PasswordField
-from wtforms.validators import InputRequired
+from wtforms.validators import InputRequired, EqualTo, Length, Regexp
 from wtforms.validators import ValidationError
+
+import re
 
 from wiki.core import clean_url
 from wiki.web import current_wiki
@@ -56,3 +58,21 @@ class LoginForm(FlaskForm):
             return
         if not user.check_password(field.data):
             raise ValidationError('Username and password do not match.')
+
+class UserSignUp(FlaskForm):
+    username = StringField('Username', [InputRequired()])
+    password = PasswordField('Password', [
+        InputRequired(), Length(min=6)])
+    confirm_pass = PasswordField('Confirm password', [InputRequired(),Length(min=6), EqualTo('password', message='Passwords must match.')])
+
+
+    def validate_username(form, field):
+        user = current_users.get_user(field.data)
+        if user:
+            raise ValidationError("Username has already been taken.")
+
+    def validate_confirm_pass(form, field):
+        confirm_pass = field.data
+        if not any(char.isdigit() for char in confirm_pass):
+            raise ValidationError("Password must contain at least one digit.")
+

@@ -3,7 +3,7 @@
     "active": true,
     "authentication_method": "cleartext",
     "password": "1234",
-    "authenticated": true,
+    "authenticated": false,
     "roles": []
   },
   "sam": {
@@ -12,5 +12,173 @@
     "password": "1234",
     "authenticated": true,
     "roles": []
+  },
+  "Justin": {
+    "active": true,
+    "roles": [],
+    "authentication_method": "cleartext",
+    "authenticated": false,
+    "password": "1234"
+  },
+  "justin": {
+    "active": true,
+    "roles": [],
+    "authentication_method": "cleartext",
+    "authenticated": false,
+    "password": "1234"
+  },
+  "button": {
+    "active": true,
+    "roles": [],
+    "authentication_method": "cleartext",
+    "authenticated": false,
+    "password": "111"
+  },
+  "try": {
+    "active": true,
+    "roles": [],
+    "authentication_method": "cleartext",
+    "authenticated": false,
+    "password": "111"
+  },
+  "req": {
+    "active": true,
+    "roles": [],
+    "authentication_method": "cleartext",
+    "authenticated": false,
+    "password": "req"
+  },
+  "bev": {
+    "active": true,
+    "roles": [],
+    "authentication_method": "cleartext",
+    "authenticated": false,
+    "password": "123"
+  },
+  "poiu": {
+    "active": true,
+    "roles": [],
+    "authentication_method": "cleartext",
+    "authenticated": false,
+    "password": "1234"
+  },
+  "yuij": {
+    "active": true,
+    "roles": [],
+    "authentication_method": "cleartext",
+    "authenticated": false,
+    "password": "1234"
+  },
+  "tyru": {
+    "active": true,
+    "roles": [],
+    "authentication_method": "cleartext",
+    "authenticated": false,
+    "password": "123"
+  },
+  "sec": {
+    "active": true,
+    "roles": [],
+    "authentication_method": "cleartext",
+    "authenticated": false,
+    "password": "123"
+  },
+  "test1": {
+    "active": true,
+    "roles": [],
+    "authentication_method": "cleartext",
+    "authenticated": false,
+    "password": "123"
+  },
+  "test2": {
+    "active": true,
+    "roles": [],
+    "authentication_method": "cleartext",
+    "authenticated": false,
+    "password": "123"
+  },
+  "test3": {
+    "active": true,
+    "roles": [],
+    "authentication_method": "cleartext",
+    "authenticated": false,
+    "password": "asdfgh"
+  },
+  "test4": {
+    "active": true,
+    "roles": [],
+    "authentication_method": "cleartext",
+    "authenticated": false,
+    "password": "1234"
+  },
+  "009": {
+    "active": true,
+    "roles": [],
+    "authentication_method": "cleartext",
+    "authenticated": false,
+    "password": "1234"
+  },
+  "test6": {
+    "active": true,
+    "roles": [],
+    "authentication_method": "cleartext",
+    "authenticated": false,
+    "password": "1234"
+  },
+  "test8": {
+    "active": true,
+    "roles": [],
+    "authentication_method": "cleartext",
+    "authenticated": false,
+    "password": "1234"
+  },
+  "test000": {
+    "active": true,
+    "roles": [],
+    "authentication_method": "cleartext",
+    "authenticated": true,
+    "password": "1234"
+  },
+  "testy": {
+    "active": true,
+    "roles": [],
+    "authentication_method": "cleartext",
+    "authenticated": true,
+    "password": "123456"
+  },
+  "Sam": {
+    "active": true,
+    "roles": [],
+    "authentication_method": "cleartext",
+    "authenticated": true,
+    "password": "123456"
+  },
+  "testing12": {
+    "active": true,
+    "roles": [],
+    "authentication_method": "cleartext",
+    "authenticated": true,
+    "password": "123456"
+  },
+  "iop": {
+    "active": true,
+    "roles": [],
+    "authentication_method": "cleartext",
+    "authenticated": true,
+    "password": "testing"
+  },
+  "inh": {
+    "active": true,
+    "roles": [],
+    "authentication_method": "cleartext",
+    "authenticated": true,
+    "password": "testing"
+  },
+  "Justin123": {
+    "active": true,
+    "roles": [],
+    "authentication_method": "cleartext",
+    "authenticated": true,
+    "password": "Testing12"
   }
 }
