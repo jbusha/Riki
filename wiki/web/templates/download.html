@@ -8,5 +8,5 @@
 {% endblock content %}
 
 {% block sidebar %}
-<p class="alert alert-success">Filesize: Less than 1TB</p>
+<p class="alert alert-success">Filesize: {{ "%.2f" % file_size }} KB</p>
 {% endblock sidebar %}
