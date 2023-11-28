@@ -254,6 +254,9 @@ class Page(object):
             int: The size of the file in KB.
         """
         path = self.get_file_path(keyword)
+        # check if file exists
+        if not os.path.isfile(path):
+            self.save()
         return os.path.getsize(path) / 1024
     
     def get_file_path(self, keyword):
