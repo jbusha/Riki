@@ -221,14 +221,6 @@ class Page(object):
             if not os.path.exists(path):
                 self.save_text_file()
         return path
-    
-    # Q: This section above looks code-smelly. How could it be refactored to be more scalable?
-    # A: I'd say the code above is not very scalable because it's not very DRY. The code is repeated
-    #    in the save_text_file() and get_text_file_path() functions. I would refactor it by creating
-    #    a function that returns the file path, and then use that function in the save_text_file() and
-    #    get_text_file_path() functions. I would also create a function that returns the file size, and
-    #    then use that function in the get_text_file_size() and get_md_file_size() functions. This would
-
 
     @property
     def meta(self):
