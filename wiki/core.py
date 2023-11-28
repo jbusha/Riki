@@ -4,12 +4,14 @@
 """
 from collections import OrderedDict
 from io import open
+from io import BytesIO
 import os
 import re
 
 from flask import abort
 from flask import url_for
 import markdown
+from pdfdocument.document import PDFDocument
 
 def clean_url(url):
     """
@@ -197,29 +199,80 @@ class Page(object):
             self.load()
             self.render()
             self.save_text_file()
+            self.save_pdf_file()
 
     def save_text_file(self):
+        """
+        Saves the text file for the page. This is used for the download feature.
+
+        Attributes:
+            None
+        
+        Returns:
+            None
+        """
         text_content = self.title + "\n\n" + self.body + "\n\nTags:\n" + self.tags
         text_file = text_content.encode('utf-8') 
-        file_path = self.get_text_file_path()
+        file_path = self.get_file_path("txt")
 
         os.makedirs(os.path.dirname(file_path), exist_ok=True)
 
         with open(file_path, 'wb') as f:
             f.write(text_file)
+
+    def save_pdf_file(self):
+        """
+        Saves the pdf file for the page. This is used for the download feature.
+
+        Attributes:
+            None
+        
+        Returns:
+            None
+        """
+        pdf = BytesIO()
+        pdf_file = PDFDocument(pdf)
+        pdf_file.init_report()
+        pdf_file.h1(self.title)
+        pdf_file.p(self.body)
+        pdf_file.generate()
+        file_path = self.get_file_path("pdf")
+
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
+
+        with open(file_path, 'wb') as f:
+            f.write(pdf.getvalue())
     
-    def get_file_size(self, keyword): # in kb
+    def get_file_size(self, keyword):
+        """
+        Returns the size of a file for download in KB.
+
+        Attributes:
+            keyword: The keyword to determine which file to get the size of.
+
+        Returns:
+            int: The size of the file in KB.
+        """
         path = self.get_file_path(keyword)
         return os.path.getsize(path) / 1024
     
     def get_file_path(self, keyword):
+        """
+        Returns the path of a file for download.
+
+        Attributes:
+            keyword: The keyword to determine which file to get the path of.
+
+        Returns:
+            str: The path of the file.
+        """
         BASE_CONTENT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         if keyword == 'md':
             path = os.path.join(BASE_CONTENT_DIR, 'content', self.url + '.md')
         elif keyword == 'txt':
-            path = os.path.join(BASE_CONTENT_DIR, 'content', 'txt', self.url + '.txt') # check if the file exists, if not, create it
-            if not os.path.exists(path):
-                self.save_text_file()
+            path = os.path.join(BASE_CONTENT_DIR, 'content', 'txt', self.url + '.txt')
+        elif keyword == 'pdf':
+            path = os.path.join(BASE_CONTENT_DIR, 'content', 'pdf', self.url + '.pdf')
         return path
 
     @property

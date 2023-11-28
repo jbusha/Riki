@@ -12,4 +12,9 @@
     <input type="submit" class="btn btn-success" value="Download as md file">
     <p>Filesize: {{ "%.2f" % md_file_size }} KB</p>
 </form>
+<form method="POST" class="form-inline">
+    <input type="hidden" name="download_type" value="pdf">
+    <input type="submit" class="btn btn-success" value="Download as pdf file">
+    <p>Filesize: {{ "%.2f" % pdf_file_size }} KB</p>
+</form>
 {% endblock content %}

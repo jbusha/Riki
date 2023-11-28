@@ -1,6 +1,6 @@
 World
 
-The World is a place. I live there.
+The World is a place. I live there..
 
 Tags:
 Places
