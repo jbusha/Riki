@@ -101,15 +101,16 @@ def move(url):
 @protect
 def download(url):
     page = current_wiki.get_or_404(url)
-    text_file = (page.title + "\n\n" + page.body + "\n\nTags:\n" + page.tags).encode('utf-8')
-    text_file_size_kb = len(text_file) / 1024
+    text_file_location = page.get_text_file_path()
+    text_file_size = page.get_text_file_size()
+    md_file_location = page.get_md_file_path()
+    md_file_size = page.get_md_file_size()
     if request.method == 'POST':
-        # send a text file back to the user
-        return send_file(
-            io.BytesIO(text_file),
-            as_attachment=True,
-            download_name=page.title + '.txt')
-    return render_template('download.html', page=page, file_size = text_file_size_kb)
+        if request.form.get('download_type') == 'txt':
+            return send_file(text_file_location, as_attachment=True)
+        elif request.form.get('download_type') == 'md':
+            return send_file(md_file_location, as_attachment=True)
+    return render_template('download.html', page=page, text_file_size=text_file_size, md_file_size=md_file_size)
 
 @bp.route('/delete/<path:url>/')
 @protect

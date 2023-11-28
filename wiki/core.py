@@ -11,7 +11,6 @@ from flask import abort
 from flask import url_for
 import markdown
 
-
 def clean_url(url):
     """
         Cleans the url and corrects various errors. Removes multiple
@@ -197,6 +196,31 @@ class Page(object):
         if update:
             self.load()
             self.render()
+            self.save_text_file()
+
+    def save_text_file(self):
+        text_content = self.title + "\n\n" + self.body + "\n\nTags:\n" + self.tags
+        text_file = text_content.encode('utf-8') 
+        file_path = self.get_text_file_path()
+
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
+
+        with open(file_path, 'wb') as f:
+            f.write(text_file)
+
+    def get_text_file_path(self): # return the text file location, non relative
+        BASE_CONTENT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        return os.path.join(BASE_CONTENT_DIR, 'content', 'txt', self.url + '.txt')
+    
+    def get_text_file_size(self): # in kb
+        return os.path.getsize(self.get_text_file_path()) / 1024
+    
+    def get_md_file_path(self): # return the md file location, non relative
+        BASE_CONTENT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        return os.path.join(BASE_CONTENT_DIR, 'content', self.url + '.md')
+    
+    def get_md_file_size(self): # in kb
+        return os.path.getsize(self.get_md_file_path()) / 1024
 
     @property
     def meta(self):
