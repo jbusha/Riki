@@ -207,20 +207,28 @@ class Page(object):
 
         with open(file_path, 'wb') as f:
             f.write(text_file)
+    
+    def get_file_size(self, keyword): # in kb
+        path = self.get_file_path(keyword)
+        return os.path.getsize(path) / 1024
+    
+    def get_file_path(self, keyword):
+        BASE_CONTENT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        if keyword == 'md':
+            path = os.path.join(BASE_CONTENT_DIR, 'content', self.url + '.md')
+        elif keyword == 'txt':
+            path = os.path.join(BASE_CONTENT_DIR, 'content', 'txt', self.url + '.txt') # check if the file exists, if not, create it
+            if not os.path.exists(path):
+                self.save_text_file()
+        return path
+    
+    # Q: This section above looks code-smelly. How could it be refactored to be more scalable?
+    # A: I'd say the code above is not very scalable because it's not very DRY. The code is repeated
+    #    in the save_text_file() and get_text_file_path() functions. I would refactor it by creating
+    #    a function that returns the file path, and then use that function in the save_text_file() and
+    #    get_text_file_path() functions. I would also create a function that returns the file size, and
+    #    then use that function in the get_text_file_size() and get_md_file_size() functions. This would
 
-    def get_text_file_path(self): # return the text file location, non relative
-        BASE_CONTENT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        return os.path.join(BASE_CONTENT_DIR, 'content', 'txt', self.url + '.txt')
-    
-    def get_text_file_size(self): # in kb
-        return os.path.getsize(self.get_text_file_path()) / 1024
-    
-    def get_md_file_path(self): # return the md file location, non relative
-        BASE_CONTENT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        return os.path.join(BASE_CONTENT_DIR, 'content', self.url + '.md')
-    
-    def get_md_file_size(self): # in kb
-        return os.path.getsize(self.get_md_file_path()) / 1024
 
     @property
     def meta(self):

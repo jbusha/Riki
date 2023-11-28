@@ -101,10 +101,10 @@ def move(url):
 @protect
 def download(url):
     page = current_wiki.get_or_404(url)
-    text_file_location = page.get_text_file_path()
-    text_file_size = page.get_text_file_size()
-    md_file_location = page.get_md_file_path()
-    md_file_size = page.get_md_file_size()
+    text_file_location = page.get_file_path("txt")
+    text_file_size = page.get_file_size("txt")
+    md_file_location = page.get_file_path("md")
+    md_file_size = page.get_file_size("md")
     if request.method == 'POST':
         if request.form.get('download_type') == 'txt':
             return send_file(text_file_location, as_attachment=True)
