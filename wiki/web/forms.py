@@ -62,9 +62,8 @@ class LoginForm(FlaskForm):
 class UserSignUp(FlaskForm):
     username = StringField('Username', [InputRequired()])
     password = PasswordField('Password', [
-        InputRequired(), Length(min=6)])
-    confirm_pass = PasswordField('Confirm password', [InputRequired(),Length(min=6), EqualTo('password', message='Passwords must match.')])
-
+        InputRequired()])
+    confirm_pass = PasswordField('Confirm password', [InputRequired(), EqualTo('password', message='Passwords must match.')])
 
     def validate_username(form, field):
         user = current_users.get_user(field.data)
@@ -75,4 +74,6 @@ class UserSignUp(FlaskForm):
         confirm_pass = field.data
         if not any(char.isdigit() for char in confirm_pass):
             raise ValidationError("Password must contain at least one digit.")
+        if len(confirm_pass) < 6:
+            raise ValidationError("Password must be at least 6 characters long.")
 
