@@ -270,9 +270,9 @@ class Page(object):
             str: The path of the file.
         """
         # base content directory is the path minus the last folder
-        BASE_CONTENT_DIR = os.path.join(self.path, os.pardir)
+        BASE_CONTENT_DIR = os.path.dirname(os.path.abspath(self.path))
         if keyword == 'md':
-            path = self.path
+            path = os.path.abspath(self.path)
         elif keyword == 'txt':
             path = os.path.join(BASE_CONTENT_DIR, 'txt', self.url + '.txt')
         elif keyword == 'pdf':
