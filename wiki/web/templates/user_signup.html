@@ -5,16 +5,18 @@
 {% block content %}
 <form class="form form-inline" method="POST">
     {{ form.hidden_tag() }}
-	<div class="control-group">
+
+    <div class="control-group">
         <div class="controls">
             {{ form.username(placeholder='Username') }}
-            {%  for error in form.username.errors %}
-            <div class="text-warning">
-                {{ error }}
-            </div>
+            {% for error in form.username.errors %}
+                <div class="text-warning">
+                    {{ error }}
+                </div>
             {% endfor %}
         </div>
     </div>
+
     <div class="control-group">
         <div class="controls">
             {{ form.password(placeholder='Password') }}
@@ -22,47 +24,45 @@
         </div>
     </div>
 
-<div class="control-group">
+    <div class="control-group">
         <div class="controls">
             {{ form.confirm_pass(placeholder='Confirm Password') }}
             <input type="checkbox" onclick="toggleConfirmPassword()"> Show/Hide Password
             {% for error in form.confirm_pass.errors %}
-            <div class="text-warning">
-                {{ error }}
-            </div>
+                <div class="text-warning">
+                    {{ error }}
+                </div>
             {% endfor %}
         </div>
     </div>
+
     <div class="control-group">
         <div class="controls">
             <input type="submit" class="btn btn-primary" value="Sign Up">
         </div>
     </div>
-<p>Already have a profile? <a href="{{ url_for('wiki.user_login') }}">Back to login!</a></p>
+
+    <p>Already have a profile? <a href="{{ url_for('wiki.user_login') }}">Back to login!</a></p>
 </form>
 
 <script>
     function togglePassword() {
-        var passwordField = document.getElementById("password");
-        if (passwordField.type === "password") {
-                passwordField.type = "text";
-                button.textContent = "Hide Password";
-            } else {
-                passwordField.type = "password";
-                button.textContent = "Show Password";
-            }
+        toggleFieldType("password");
     }
 
     function toggleConfirmPassword() {
-        var confirmPasswordField = document.getElementById("confirm_pass");
-        if (confirmPasswordField.type === "password") {
-                confirmPasswordField.type = "text";
-                button.textContent = "Hide Password";
-            } else {
-                confirmPasswordField.type = "password";
-                button.textContent = "Show Password";
-            }
+        toggleFieldType("confirm_pass");
     }
 
+    function toggleFieldType(fieldId) {
+        var field = document.getElementById(fieldId);
+        if (field.type === "password") {
+            field.type = "text";
+            button.textContent = "Hide Password";
+        } else {
+            field.type = "password";
+            button.textContent = "Show Password";
+        }
+    }
 </script>
 {% endblock content %}
