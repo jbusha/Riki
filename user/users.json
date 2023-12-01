@@ -250,5 +250,12 @@
     "authentication_method": "cleartext",
     "authenticated": true,
     "password": "Test1234"
+  },
+  "test_user1": {
+    "active": true,
+    "roles": [],
+    "authentication_method": "cleartext",
+    "authenticated": true,
+    "password": "TestPass12"
   }
 }

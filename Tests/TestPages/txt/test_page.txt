@@ -1,6 +1,0 @@
-Test Page
-
-This is a test page.
-
-Tags:
-test, page
