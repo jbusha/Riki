@@ -79,5 +79,8 @@ class TestPage(unittest.TestCase):
         self.assertFalse(os.path.isfile(path))
         self.assertTrue(self.page.get_file_size("txt") > 0)
 
+    def test_get_file_path_invalid(self):
+        self.assertRaises(ValueError, self.page.get_file_path, "invalid")
+
 if __name__ == '__main__':
     unittest.main()

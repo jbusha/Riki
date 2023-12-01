@@ -277,6 +277,8 @@ class Page(object):
             path = os.path.join(BASE_CONTENT_DIR, 'txt', self.url + '.txt')
         elif keyword == 'pdf':
             path = os.path.join(BASE_CONTENT_DIR, 'pdf', self.url + '.pdf')
+        else:
+            raise ValueError("Invalid keyword: {}".format(keyword))
         return path
 
     @property
